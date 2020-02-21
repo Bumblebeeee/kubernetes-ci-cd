@@ -90,6 +90,7 @@ metadata:
   name: jenkins
   labels:
     app: jenkins
+    tier: jenkins
 spec:
   selector:
     matchLabels:

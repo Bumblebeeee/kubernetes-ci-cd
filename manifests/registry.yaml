@@ -60,13 +60,17 @@ spec:
   type: NodePort
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: registry
   labels:
     app: registry
 spec:
+  selector:
+    matchLabels:
+      app: registry
+      tier: registry
   strategy:
     type: Recreate
   template:
@@ -76,8 +80,8 @@ spec:
         tier: registry
     spec:
       containers:
-      - image: registry:2
-        name: registry
+      - name: registry
+        image: registry:2
         volumeMounts:
         - name: docker
           mountPath: /var/run/docker.sock
